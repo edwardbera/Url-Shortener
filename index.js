@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -6,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 const UrlModel = require('./models/UrlModel.js');
 
-mongoose.connect('mongodb+srv://edwardbera263:L0rdb3w1thy0u@cluster0.f1o1r.mongodb.net/UrlShortener?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology : true})
+mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopology : true})
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: false}))
@@ -15,13 +16,19 @@ app.get("/", function (request, response) {
   });
 
 app.post('/shorten', async (req, res) =>{
- await UrlModel.create({full : req.body.url})
+ await UrlModel.create({fullUrl : req.body.url})
  res.send(200)
 
 })
 
+app.get('/getUrls', async(req, res)=>{
+    const urls = await UrlModel.find();
+   
+    res.send(urls)
+})
+
 app.get('/:shortUrl', async (req, res)=>{
-    const url = await UrlModel.findOne({short : req.params.shortUrl})
+    const url = await UrlModel.findOne({shortUrl : req.params.shortUrl})
     if (url == null) return res.sendStatus(404)
     url.clicks++
     url.save()
