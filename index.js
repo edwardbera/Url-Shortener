@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 var express = require('express');
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -9,11 +9,11 @@ const UrlModel = require('./models/UrlModel.js');
 
 mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopology : true})
 
-app.set('view engine', 'ejs')
+
 app.use(express.urlencoded({extended: false}))
 
 app.get("/", function (request, response) {
-    response.render("index");
+    response.render("Hello World");
   });
 
 app.post('/shorten', async (req, res) =>{
