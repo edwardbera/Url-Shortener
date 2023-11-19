@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopol
 app.use(express.urlencoded({extended: false}))
 
 app.get("/", function (request, response) {
-    response.render("Hello World");
+    response.send("Hello World");
   });
 
 app.post('/shorten', async (req, res) =>{
