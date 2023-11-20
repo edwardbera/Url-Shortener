@@ -12,15 +12,15 @@ mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopol
 
 app.use(express.urlencoded({extended: false}))
 
-app.get("/", function (request, response) {
-    response.send("Hello World");
+app.get("/", function (req, res) {
+  res.redirect("app.smur1.xyz")
   });
 
 app.post('/shorten', async (req, res) =>{
    // console.log(req.body.body.url)
  const ap = await UrlModel.create({fullUrl : req.body.body.url})
    // console.log('localhost:'+listener.address().port+'/'+ap.shortUrl)
- res.send( listener.address().address+'/'+ap.shortUrl)
+ res.send('smur1.xyz/'+ ap.shortUrl)
 
 })
 
