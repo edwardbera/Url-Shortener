@@ -1,6 +1,8 @@
+require('dotenv').config();
 var express = require('express');
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -9,6 +11,7 @@ const UrlModel = require('./models/UrlModel.js');
 mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopology : true})
 
 app.use(express.urlencoded({extended: false}))
+
 app.use(cors({
   origin: '*'
 }));
