@@ -1,4 +1,3 @@
-
 var express = require('express');
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -22,7 +21,7 @@ app.get("/", function (req, res) {
 
 app.post('/shorten', async (req, res) =>{
  const ap = await UrlModel.create({fullUrl : req.body.body.url})
- res.send('smur1.xyz/'+ ap.shortUrl)
+ res.send(process.env.DEFAULTURL + "/" + ap.shortUrl)
 
 })
 
