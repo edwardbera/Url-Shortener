@@ -1,4 +1,3 @@
-require('dotenv').config();
 var express = require('express');
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -10,6 +9,9 @@ const UrlModel = require('./models/UrlModel.js');
 mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopology : true})
 
 app.use(express.urlencoded({extended: false}))
+app.use(cors({
+  origin: '*'
+}));
 
 app.get("/", function (req, res) {
   res.redirect(process.env.HOMEPAGEURL)
