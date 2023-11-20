@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 var express = require('express');
 bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -13,7 +13,8 @@ mongoose.connect(process.env.MONGODBURL, {useNewUrlParser: true, useUnifiedTopol
 app.use(express.urlencoded({extended: false}))
 
 app.get("/", function (req, res) {
-  res.redirect("app.smur1.xyz")
+
+  res.redirect('https://app.smur1.xyz')
   });
 
 app.post('/shorten', async (req, res) =>{
